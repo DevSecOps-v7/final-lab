@@ -67,19 +67,28 @@ jobs:
       name: dependency-check-report
       path: ${{github.workspace}}/reports
 
-#Job 03 - Analisis GHAS
- GHAS:
-  runs-on: ubuntu-latest
-  needs: build
-  steps:
-  - name: Checkout code
-    uses: actions/checkout@v3
+ #Job 04 - img Docker
+  - name: Docker Login
+    uses: docker/login-action@v3.0.0
+    with:
+      username: ${{ secrets.DOCKER_USER }}
+      password: ${{ secrets.DOCKER_PASS }}
+          
 
-  - name: Install dependencies
-    run: npm install
+
+#Job 3.2 - Analisis GHAS
+# GHAS:
+#  runs-on: ubuntu-latest
+#  needs: build
+#  steps:
+#  - name: Checkout code
+#    uses: actions/checkout@v3
+
+#  - name: Install dependencies
+#    run: npm install
     
-  - name: Software Composition Analysis with GHAS
-    run: npm audit --json > npm_audit_report.json
-    shell: bash
+#  - name: Software Composition Analysis with GHAS
+#    run: npm audit --json > npm_audit_report.json
+#    shell: bash
 
 
