@@ -1,0 +1,17 @@
+# Nombre (Integracion Continua)
+name: CI
+on:
+ #Cada vez que se ejecute un push
+ push:
+ workflow_dispatch:
+
+# Se declaran jobs y steps (jobs --< steps)
+jobs:
+  
+ build:   
+  runs-on: ubuntu-latest  
+  steps:   
+   - uses: actions/checkout@v3   
+   - name: Run a multi-line script
+     run: |
+       echo "Comienzo de tarea final"
