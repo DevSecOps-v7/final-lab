@@ -26,7 +26,7 @@ jobs:
    #step 3 - Img con Docker
    - name: Docker Build 
      run: |
-      docker build --tag S3T0/final-lab:latest .
+      docker build --tag s3t0/final-lab:latest .
  
  #Job 2.0 - Integracion con SonarCloud 
  SAST:
