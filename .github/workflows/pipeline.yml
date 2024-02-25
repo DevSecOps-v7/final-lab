@@ -6,17 +6,23 @@ on:
 
 jobs:
 
- #Job 01 - Saludo incial
+ #Job 1.0 - Saludo incial
  build:   
   runs-on: ubuntu-latest  
   steps:   
    - uses: actions/checkout@v3   
-   - name: Start
+   - name: Comienzo
      run: |
        echo "Hola, comienzo de tarea final"
 
+   #Job 1.1 - IMG con Docker
+   - name: Docker Login
+     uses: docker/login-action@v3.0.0
+     with:
+      username: ${{ secrets.DOCKER_USER }}
+      password: ${{ secrets.DOCKER_PASS }}
  
- #Job 02 - Integracion con SonarCloud 
+ #Job 2.0 - Integracion con SonarCloud 
  SAST:
   runs-on: ubuntu-latest
   needs: build
@@ -38,7 +44,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.SONAR_TOKEN }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-#Job 03 - Analisis SCA con Dependency Check
+#Job 3.0 - Analisis SCA con Dependency Check
  SCA:
   runs-on: ubuntu-latest
   needs: build
@@ -67,20 +73,10 @@ jobs:
       name: dependency-check-report
       path: ${{github.workspace}}/reports
 
- #Job 04 - IMG con Docker
- DOCKER:
-  runs-on: ubuntu-latest
-  needs: build
-  steps:
-  - name: Docker Login
-    uses: docker/login-action@v3.0.0
-    with:
-      username: ${{ secrets.DOCKER_USER }}
-      password: ${{ secrets.DOCKER_PASS }}
           
 
 
-#Job 3.2 - Analisis GHAS
+#Job 3.1 - Analisis GHAS
 # GHAS:
 #  runs-on: ubuntu-latest
 #  needs: build
