@@ -65,5 +65,5 @@ jobs:
     uses: actions/upload-artifact@master
     with:
       name: dependency-check-report
-      path: dependency-check-report.html
+      path: ${{github.workspace}}/reports
 
