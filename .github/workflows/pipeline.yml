@@ -15,30 +15,8 @@ jobs:
    - name: Comienzo
      run: |
        echo "Hola, comienzo de tarea final"
-
-#Job 2.0 - Docker
- Docker:   
-  runs-on: ubuntu-latest
-  needs: build
-  
-  steps: 
-   - name: Checkout code
-     uses: actions/checkout@v3
-     
-   - name: Build Docker image
-     run: |
-       docker build -t setocl/final-lab:latest .
-     
-   - name: Docker Login
-     uses: docker/login-action@v3.0.0
-     with:
-      username: ${{ secrets.DOCKER_USER }}
-      password: ${{ secrets.DOCKER_PASS }}
-     
-   - name: Push image to DockerHub
-     run: docker push setocl/final-lab:latest
  
- #Job 3.0 - Integracion y Analisis con SonarCloud 
+ #Job 2.0 - Integracion y Analisis con SonarCloud 
  SAST:
   runs-on: ubuntu-latest
   needs: build
@@ -60,7 +38,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.SONAR_TOKEN }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-#Job 4.0 - Analisis SCA con Dependency Check
+#Job 3.0 - Analisis SCA con Dependency Check
  SCA:
   runs-on: ubuntu-latest
   needs: build
@@ -90,7 +68,27 @@ jobs:
       path: ${{github.workspace}}/reports
 
           
-
+#Job 4.0 - Docker
+ Docker:   
+  runs-on: ubuntu-latest
+  needs: [SAST, SCA]
+  
+  steps: 
+   - name: Checkout code
+     uses: actions/checkout@v3
+     
+   - name: Build Docker image
+     run: |
+       docker build -t setocl/final-lab:latest .
+     
+   - name: Docker Login
+     uses: docker/login-action@v3.0.0
+     with:
+      username: ${{ secrets.DOCKER_USER }}
+      password: ${{ secrets.DOCKER_PASS }}
+     
+   - name: Push image to DockerHub
+     run: docker push setocl/final-lab:latest
 
 #Job 3.1 - Analisis GHAS
 # GHAS:
