@@ -27,7 +27,7 @@ jobs:
    - name: Docker Build 
      run: |
       docker build --tag setocl/final-lab:latest .
-     working-directory: /path/to/your/repo/root
+     working-directory: ${{ github.workspace }}
  
  #Job 2.0 - Integracion con SonarCloud 
  SAST:
