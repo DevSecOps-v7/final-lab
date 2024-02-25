@@ -62,7 +62,7 @@ jobs:
       format: 'HTML'
 
   - name: Upload Dependency Check Report
-    uses: actions/upload-artifact@v2
+    uses: actions/upload-artifact@master
     with:
       name: dependency-check-report
       path: dependency-check-report.html
