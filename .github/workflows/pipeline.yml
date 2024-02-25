@@ -80,4 +80,6 @@ jobs:
     
   - name: Software Composition Analysis with GHAS
     run: npm audit --json > npm_audit_report.json
+    shell: bash
+
 
