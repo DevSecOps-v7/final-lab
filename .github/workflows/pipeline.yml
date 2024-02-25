@@ -6,16 +6,17 @@ on:
 
 jobs:
 
- #Job 1.0 - Saludo incial
+ #Job 1.0 - Build
  build:   
   runs-on: ubuntu-latest  
+  #step 1 - Saludo
   steps:   
    - uses: actions/checkout@v3   
    - name: Comienzo
      run: |
        echo "Hola, comienzo de tarea final"
 
-   #Job 1.1 - IMG con Docker
+   #step 2 - IMG con Docker
    - name: Docker Login
      uses: docker/login-action@v3.0.0
      with:
