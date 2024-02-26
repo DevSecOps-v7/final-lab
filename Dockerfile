@@ -11,6 +11,10 @@ RUN yarn build
 
 FROM nginx:stable-alpine
 WORKDIR /usr/share/nginx/html
+
+# Actualiza la versión de libexpat
+RUN apk add --no-cache libexpat=2.6.0-r0
+
 RUN rm -rf ./*
 COPY --from=builder /app/dist .
 EXPOSE 80
