@@ -116,7 +116,17 @@ jobs:
     run: |
      docker pull setocl/final-lab:latest
 
-  #Step 2- Despliegue
+  #Step 2- Node
+  - name: Setup Node.js
+    uses: actions/checkout@v3
+    with:
+      node-version: '14'
+      
+  #Step 3- npm
+  - name: Install dependencies
+    run: npm install
+
+  #Step 4- Despliegue
   - name: Despliegue de la Aplicacion
     run: |
       docker run -p 8085:8085 --name final-lab-deploy -d setocl/final-lab:latest
