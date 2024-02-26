@@ -129,7 +129,7 @@ jobs:
   #Step 4- Despliegue
   - name: Despliegue de la Aplicacion
     run: |
-      docker run -p 8085:8085 --name final-lab-deploy -d setocl/final-lab:latest
+      docker run -p 8085:80 --name final-lab-deploy -d setocl/final-lab:latest
 
 #Job ?? - Analisis GHAS
 # GHAS:
